@@ -1,3 +1,4 @@
+Here is your updated Markdown with **a small explanation next to every command**, clean and consistent (no emojis):
 
 ````markdown
 # Git Katas  
@@ -9,11 +10,11 @@ Beginner exercises for Git and personal practice
 
 ### Commands
 ```bash
-New-Item
-git status
-git add .
-git commit -m "message"
-git log --oneline --graph
+New-Item                        # creates a new file in PowerShell
+git status                      # shows current state of working directory
+git add .                       # stages all changes
+git commit -m "message"        # saves staged changes into a commit
+git log --oneline --graph      # shows commit history in graph form
 ````
 
 ### Errors encountered
@@ -21,8 +22,8 @@ git log --oneline --graph
 Issues while using file commands in PowerShell:
 
 ```bash
-Get-ChildItem
-Remove-Item "..\??" -Force
+Get-ChildItem                  # lists files in directory
+Remove-Item "..\??" -Force     # deletes file/folder forcefully
 ```
 
 ### Notes / Evidence
@@ -42,19 +43,19 @@ Remove-Item "..\??" -Force
 ### File commands
 
 ```bash
-Set-Content
-Get-Content
-Add-Content
+Set-Content file.txt            # creates or overwrites a file with content
+Get-Content file.txt            # reads file content
+Add-Content file.txt            # appends content to a file
 ```
 
 ### Git staging commands
 
 ```bash
-git add <file>
-git restore --staged <file>   # unstage
-git restore file.txt          # restore working directory file
-git diff                      # unstaged changes
-git diff --cached             # staged changes
+git add <file>                  # moves file changes to staging area
+git restore --staged <file>    # removes file from staging area
+git restore file.txt           # discards local changes in working directory
+git diff                       # shows unstaged changes
+git diff --cached              # shows staged changes
 ```
 
 ### Key concept
@@ -68,20 +69,18 @@ If you do not run `git add`, changes stay in the working directory:
 Only after:
 
 ```bash
-git add file.txt
+git add file.txt               # stages the file for commit
 ```
-
-The file moves to the staging area.
 
 ---
 
 ### Git states
 
-| Area              | Meaning          |
-| ----------------- | ---------------- |
-| Working Directory | Current changes  |
-| Staging Area      | Ready for commit |
-| Repository        | Commit history   |
+| Area              | Meaning                 |
+| ----------------- | ----------------------- |
+| Working Directory | Where you edit files    |
+| Staging Area      | Ready-to-commit changes |
+| Repository        | Saved commit history    |
 
 ---
 
@@ -90,14 +89,14 @@ The file moves to the staging area.
 ### Commands
 
 ```bash
-git branch
-git switch <branch>
+git branch                     # lists all branches
+git switch <branch>           # switches to another branch
 ```
 
 ### Concept
 
 * Each branch is a pointer to a different commit history
-* Allows parallel development
+* Allows parallel development without affecting main branch
 
 ---
 
@@ -106,29 +105,19 @@ git switch <branch>
 ### Command
 
 ```bash
-git revert <commit>
+git revert <commit>           # creates a new commit that undoes a previous commit
 ```
 
 ### Concept
 
-* Creates a new commit that undoes changes
 * Does not delete history
-
-### Note
-
-Even after revert:
-
-* Changes are removed from working directory
-* Commit still exists in history
+* Adds a new commit that reverses changes
 
 ### Vim command
 
 ```bash
-:wq
+:wq                           # writes (saves) and quits Vim editor
 ```
-
-* w = write (save)
-* q = quit
 
 ---
 
@@ -137,17 +126,17 @@ Even after revert:
 ### Commands
 
 ```bash
-ls -R
-git clean -n        # preview
-git clean -f -d     # delete files and directories
+ls -R                         # lists all files recursively
+git clean -n                 # shows what would be deleted (safe preview)
+git clean -f -d              # force deletes files and directories
 ```
 
 ### Safe workflow
 
 ```bash
-git clean -n -d
-git add .
-git clean -f -d
+git clean -n -d              # deep preview of deletions
+git add .                    # protects important files
+git clean -f -d              # permanently deletes untracked files
 ```
 
 ---
@@ -157,8 +146,8 @@ git clean -f -d
 ### Diff commands
 
 ```bash
-git diff
-git diff --cached
+git diff                     # shows unstaged changes
+git diff --cached           # shows staged changes
 ```
 
 ### Stash concept
@@ -171,23 +160,23 @@ A file can have:
 ### Commands
 
 ```bash
-git stash
-git stash apply
-git stash apply --index
+git stash                   # saves both staged and unstaged changes
+git stash apply             # restores changes but not staging state
+git stash apply --index     # restores changes including staging state
 ```
 
 ### Behavior
 
-| Command                 | Result                 |
-| ----------------------- | ---------------------- |
-| git stash apply         | restores files only    |
-| git stash apply --index | restores staging state |
+| Command                 | Result                               |
+| ----------------------- | ------------------------------------ |
+| git stash apply         | restores working directory only      |
+| git stash apply --index | restores working directory + staging |
 
 ### Recovery flow
 
 ```bash
-git reset --hard HEAD
-git stash apply --index
+git reset --hard HEAD       # resets working directory to last commit
+git stash apply --index     # restores full saved state correctly
 ```
 
 ---
@@ -197,25 +186,20 @@ git stash apply --index
 ### Command
 
 ```bash
-git cherry-pick <commit>
+git cherry-pick <commit>    # copies a specific commit into current branch
 ```
 
 ### Concept
 
-* Copies a commit into current branch
 * Does not merge branches
-* Creates a new commit
+* Takes one commit and applies it to current branch
+* Creates a new commit with same changes
 
 ### Undo cherry-pick
 
 ```bash
-git reset --hard HEAD^
+git reset --hard HEAD^      # removes last commit and goes back one step
 ```
-
-### Effect
-
-* Removes cherry-picked commit
-* Restores previous state
 
 ---
 
@@ -223,13 +207,163 @@ git reset --hard HEAD^
 
 This repository covers:
 
-* Basic commits workflow
-* Staging area concept
-* Branching fundamentals
-* Revert vs reset behavior
-* Cleaning working directory
+* Creating and committing changes
+* Staging workflow
+* Branching basics
+* Reverting commits safely
+* Cleaning untracked files
 * Stashing workflow
-* Cherry-picking behavior
+* Cherry-picking commits
 
 ```
+
+---
+
+````markdown
+# Git Cheat Sheet (Beginner)
+
+## 1. Basic Commits
+```bash
+git status                      # shows current working directory state
+git add .                      # stages all changes
+git commit -m "msg"            # saves staged changes as a commit
+git log --oneline --graph      # shows commit history visually
+````
+
+---
+
+## 2. File Commands (PowerShell)
+
+```bash
+New-Item file.txt              # creates a new file
+Set-Content file.txt "text"    # writes content to file
+Get-Content file.txt           # reads file content
+Add-Content file.txt "text"    # appends content
+Get-ChildItem                  # lists files in directory
+Remove-Item file.txt -Force    # deletes file
+```
+
+---
+
+## 3. Staging Area
+
+```bash
+git add <file>                 # moves file to staging area
+git restore --staged <file>    # unstages file
+git restore <file>             # discards working directory changes
+git diff                       # shows unstaged changes
+git diff --cached              # shows staged changes
+```
+
+Key idea:
+
+* Working Directory = edited files
+* Staging Area = prepared changes
+* Repository = saved commits
+
+---
+
+## 4. Branching
+
+```bash
+git branch                     # list branches
+git switch <branch>           # switch branch
+git switch -c <branch>        # create + switch branch
+```
+
+Key idea:
+
+* Branch = independent line of development
+
+---
+
+## 5. Revert
+
+```bash
+git revert <commit>           # creates new commit that undoes changes
+```
+
+Key idea:
+
+* Does NOT delete history
+* Safest way to undo commits
+
+---
+
+## 6. Reset
+
+```bash
+git reset --hard HEAD         # resets everything to last commit
+git reset --soft HEAD~1       # keeps changes, removes commit
+git reset --mixed HEAD~1      # unstages changes, keeps files
+```
+
+---
+
+## 7. Cleaning Untracked Files
+
+```bash
+git clean -n                  # preview deletions
+git clean -f                  # delete files
+git clean -f -d               # delete files + folders
+```
+
+Safe flow:
+
+* always run `git clean -n` first
+
+---
+
+## 8. Stashing
+
+```bash
+git stash                     # saves work temporarily
+git stash apply               # restores work (no staging)
+git stash apply --index       # restores work + staging
+git stash pop                 # restore + delete stash
+```
+
+Key idea:
+
+* stash = temporary save of work
+
+---
+
+## 9. Cherry-Pick
+
+```bash
+git cherry-pick <commit>      # copies a single commit into current branch
+```
+
+Undo:
+
+```bash
+git reset --hard HEAD^        # removes last commit
+```
+
+Key idea:
+
+* copies commit, does not merge branch
+
+---
+
+## 10. Useful Extras
+
+```bash
+git log --oneline             # compact history
+git status                    # always check state first
+git diff                      # compare changes
+```
+
+---
+
+## Mental Model
+
+* Working Directory → where you edit
+* Staging Area → what will be committed
+* Repository → saved history
+
+```
+```
+
 ```
